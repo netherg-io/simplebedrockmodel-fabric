@@ -56,6 +56,9 @@ public class GeoArmorRendererV2 extends HumanoidModel<LivingEntity> implements I
 
     public void preparePose(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
         this.instance.preparePose(livingEntity, itemStack, equipmentSlot, original);
+        // Fabric's armor layer never runs copyPropertiesTo on a custom model, so young would stay at its default true
+        // and scaleModelForBaby would shrink and drop every adult's armor.
+        this.young = original.young;
         this.livingEntity = livingEntity;
         this.itemStack = itemStack;
         this.equipmentSlot = equipmentSlot;

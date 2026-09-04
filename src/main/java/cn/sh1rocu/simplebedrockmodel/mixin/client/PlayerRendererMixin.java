@@ -16,6 +16,7 @@ public class PlayerRendererMixin {
     @Inject(method = "renderLeftHand", at = @At("HEAD"), cancellable = true)
     private void sbm$onRenderLeftArm(PoseStack poseStack, MultiBufferSource buffer, int packedLight, AbstractClientPlayer player, CallbackInfo ci) {
         var event = new RenderArmEvent(poseStack, buffer, packedLight, player, HumanoidArm.LEFT);
+        RenderArmEvent.EVENT.invoker().post(event);
         if (event.isCanceled()) ci.cancel();
     }
 
@@ -23,6 +24,7 @@ public class PlayerRendererMixin {
     private void sbm$onRenderRightArm(PoseStack poseStack, MultiBufferSource buffer,
                                       int packedLight, AbstractClientPlayer player, CallbackInfo ci) {
         var event = new RenderArmEvent(poseStack, buffer, packedLight, player, HumanoidArm.RIGHT);
+        RenderArmEvent.EVENT.invoker().post(event);
         if (event.isCanceled()) ci.cancel();
     }
 }

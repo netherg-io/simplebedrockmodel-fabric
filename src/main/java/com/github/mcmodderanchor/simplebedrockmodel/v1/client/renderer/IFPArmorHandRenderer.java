@@ -2,9 +2,13 @@ package com.github.mcmodderanchor.simplebedrockmodel.v1.client.renderer;
 
 import com.github.mcmodderanchor.simplebedrockmodel.v1.client.handler.FirstPersonArmorHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -14,6 +18,12 @@ import org.jetbrains.annotations.NotNull;
  * 在第一人称渲染盔甲的手臂部分模型
  */
 public interface IFPArmorHandRenderer {
+
+    /**
+     * 渲染前把盔甲骨骼摆到 original 模型的姿势上。
+     */
+    default void preparePose(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
+    }
 
     /**
      * 在第一人称手臂上渲染指定侧的盔甲手臂部分。
